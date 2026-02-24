@@ -1,0 +1,13 @@
+#include <iostream>
+class Data {
+public:
+    std::string name;
+    std::string color;
+    Data(std::string name, std::string color) {
+        this-> name = name;
+        this-> color = color;
+    }
+};
+int main() {
+
+}
