@@ -1,2 +1,4 @@
 # Monopoly
 Project for class
+
+This project will simulate the experience of traversing a board in Monopoly. To run this experience, one must simply import the code and run it. This project runs on a circularly linked list whoch contains the data for the max of 40 board spaces. It uses the functions: addSpace which adds a single space to the board, addMany attempts to add an array of new board spaces, removeByName which deletes the space with the corresponding name, findByColor which will print the information of all spaces which correlate to the provided color, move which will move the player 2-12 spaces on the board, printSpace which will return the information of the space that the player is on, printBoard which will print the information of all spaces from an index to a provided stopping point, and printGo which will return how many times the player passed GO
