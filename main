@@ -8,6 +8,39 @@ public:
         this-> color = color;
     }
 };
+template <typename T> class Node{
+public:
+    T *name;
+    T *color;
+    Node<T> *next;
+    Node(T *name, T *color) {
+        this-> name = name;
+        this-> color = color;
+        this-> next = nullptr;
+    }
+};
+template <typename T> class LinkedList{
+   private:
+    Node<T> head;
+    Node<T> tail;
+    int length;
+public:
+    LinkedList(T *name, T *color){
+        Node<T> newNode = new Node<T>(color, name);
+        head = newNode;
+        tail = newNode;
+        length = 1;
+    }
+    LinkedList(){
+        Node<T> *temp = head;
+        while (head != nullptr){
+            head = head-> next;
+            delete temp;
+            temp = head;
+        }
+    }
+
+};
 int main() {
 
 }
