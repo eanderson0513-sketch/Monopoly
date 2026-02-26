@@ -23,15 +23,19 @@ template <typename T> class LinkedList{
    private:
     Node<T> head;
     Node<T> tail;
+    Node<T> *playerPosition;
     int length;
+     int goPast;
 public:
     LinkedList(T *name, T *color){
-        Node<T> newNode = new Node<T>(color, name);
+        Node<T> newNode = new Node<T>(name, color);
         head = newNode;
         tail = newNode;
         length = 1;
+        goPast = 0;
+        playerPosition = head;
     }
-    LinkedList(){
+    ~LinkedList(){
         Node<T> *temp = head;
         while (head != nullptr){
             head = head-> next;
@@ -39,6 +43,27 @@ public:
             temp = head;
         }
     }
+    void addSpace(string name, string color) {
+        if(length == 0){
+            Node<T> newNode = new Node<T>(name, color);
+            head = newNode;
+            tail = newNode;
+        }
+        else if(length < 40){
+            tail -> next = newNode;
+            tail = newNode;
+
+        }
+        else{
+            std::cout<<"failed"<<endl;
+        }
+    }
+    void addMultiple(Node<T>[] nodes){
+        for(x = 0; x < nodes.length; x++){
+            addSpace(nodes[x].name, nodes[x].color);
+        }
+}
+
 
 };
 int main() {
