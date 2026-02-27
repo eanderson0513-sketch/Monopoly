@@ -2,9 +2,9 @@
 #include <random>
 class Data {
 public:
-    std::string name;
+    std::string name2;
     std::string color;
-    Data(std::string name, std::string color) {
+    Data(std::string name2, std::string color) {
         this-> name = name;
         this-> color = color;
     }
@@ -19,6 +19,12 @@ public:
         this-> color = color;
         this-> next = nullptr;
     }
+    string getName(){
+        return name;
+       }
+     string getColor(){
+        return color;
+     }
 };
 template <typename T> class LinkedList{
    private:
@@ -68,19 +74,29 @@ public:
             addSpace(nodes[x].name, nodes[x].color);
         }
     }
+    void printSpace(){
+        cout<<"Landed on: "<<playerPosition.getName()<<endl;
+    }
+void printGo(){
+    cout<<"Times past GO: "<<goPast<<endl;
+}
     void move(){
         int spaces = std::rand() % 11 + 1;
         for(int a = 0; a < spaces; a++){
             playerPosition = playerPosition-> next;
             if(playerPosition == head){
                 goPast++;
-                cout<<goPast<<endl;
+                printGo();
             }
         }
-        cout<<"Landed on: "<<playerPosition.name<<endl;
+        printSpace();
     }
 };
 
-int main() {
-    return 0;
+void main() {
+    LinkedList board = new LinkedList(new Node<T>("1st street", "brown"));
+    board.add("2nd street", "brown");
+    Node<T> spaces = {new Node<T>("3rd street", "grey"), new Node<T>("4th street", "grey")};
+    board.addMany(spaces);
+    board.move();
 }
