@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 class Data {
 public:
     std::string name;
@@ -31,6 +32,7 @@ public:
         Node<T> newNode = new Node<T>(name, color);
         head = newNode;
         tail = newNode;
+        tail-> next = head;
         length = 1;
         goPast = 0;
         playerPosition = head;
@@ -48,10 +50,13 @@ public:
             Node<T> newNode = new Node<T>(name, color);
             head = newNode;
             tail = newNode;
+            tail-> next = head;
         }
         else if(length < 40){
             tail -> next = newNode;
             tail = newNode;
+            tail-> next = head;
+            length++;
 
         }
         else{
@@ -59,13 +64,23 @@ public:
         }
     }
     void addMultiple(Node<T>[] nodes){
-        for(x = 0; x < nodes.length; x++){
+        for(int x = 0; x < nodes.length; x++){
             addSpace(nodes[x].name, nodes[x].color);
         }
-}
-
-
+    }
+    void move(){
+        int spaces = std::rand() % 11 + 1;
+        for(int a = 0; a < spaces; a++){
+            playerPosition = playerPosition-> next;
+            if(playerPosition == head){
+                goPast++;
+                cout<<goPast<<endl;
+            }
+        }
+        cout<<"Landed on: "<<playerPosition.name<<endl;
+    }
 };
-int main() {
 
+int main() {
+    return 0;
 }
