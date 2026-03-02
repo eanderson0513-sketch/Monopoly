@@ -1,41 +1,34 @@
 #include <iostream>
 #include <random>
+using namespace std;
 class Data {
 public:
-    std::string name2;
-    std::string color;
-    Data(std::string name2, std::string color) {
-        this-> name = name;
-        this-> color = color;
+    std::string value;
+    Data(std::string value) {
+        this-> value = value;
     }
 };
 template <typename T> class Node{
 public:
-    T *name;
-    T *color;
+    T *n;
+    T *c;
     Node<T> *next;
-    Node(T *name, T *color) {
-        this-> name = name;
-        this-> color = color;
+    Node(T *n, T *c) {
+        this-> n = n;
+        this-> c = c;
         this-> next = nullptr;
     }
-    string getName(){
-        return name;
-       }
-     string getColor(){
-        return color;
-     }
 };
 template <typename T> class LinkedList{
-   private:
-    Node<T> head;
-    Node<T> tail;
+private:
+    Node<T> *head;
+    Node<T> *tail;
     Node<T> *playerPosition;
     int length;
      int goPast;
 public:
-    LinkedList(T *name, T *color){
-        Node<T> newNode = new Node<T>(name, color);
+    LinkedList(T *n, T *c){
+        Node<T> *newNode = new Node<T>(n, c);
         head = newNode;
         tail = newNode;
         tail-> next = head;
@@ -51,34 +44,34 @@ public:
             temp = head;
         }
     }
-    void addSpace(string name, string color) {
+    void addSpace(T *n, T *c) {
+        Node<T> newNode = new Node<T>(n, c);
         if(length == 0){
-            Node<T> newNode = new Node<T>(name, color);
             head = newNode;
             tail = newNode;
             tail-> next = head;
         }
         else if(length < 40){
-            tail -> next = newNode;
+            tail-> next = newNode;
             tail = newNode;
             tail-> next = head;
             length++;
 
         }
         else{
-            std::cout<<"failed"<<endl;
+            std::cout<<"failed"<<std::endl;
         }
     }
-    void addMultiple(Node<T>[] nodes){
-        for(int x = 0; x < nodes.length; x++){
+    void addMultiple(Node<T> nodes[]){
+        for(int x = 0; x < nodes->length; x++){
             addSpace(nodes[x].name, nodes[x].color);
         }
     }
     void printSpace(){
-        cout<<"Landed on: "<<playerPosition.getName()<<endl;
+        std::cout<<"Landed on: "<<playerPosition->getName()<<std::endl;
     }
 void printGo(){
-    cout<<"Times past GO: "<<goPast<<endl;
+    std::cout<<"Times past GO: "<<goPast<<std::endl;
 }
     void move(){
         int spaces = std::rand() % 11 + 1;
@@ -93,10 +86,13 @@ void printGo(){
     }
 };
 
-void main() {
-    LinkedList board = new LinkedList(new Node<T>("1st street", "brown"));
-    board.add("2nd street", "brown");
-    Node<T> spaces = {new Node<T>("3rd street", "grey"), new Node<T>("4th street", "grey")};
-    board.addMany(spaces);
-    board.move();
+int main() {
+    Data *n = new Data("1st street");
+    Data *c = new Data("brown");
+    LinkedList<Data> *board = new LinkedList<Data>(n, c);
+    board->addSpace(n, c);
+    //Node spaces[] = {new Node(new Data("3rd street", "grey")), new Node(new Data("4th street", "grey"))};
+    //board->addMultiple(spaces);
+   // board->move();
+    return 1;
 }
