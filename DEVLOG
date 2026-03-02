@@ -1,1 +1,3 @@
 Making the Linked List system for storing information and pointers because a standard array would not have the malliability needed
+Made the methods take references to variables rather than variables themselves
+Changing the storage system for the nodes in the list
