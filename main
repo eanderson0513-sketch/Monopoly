@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 using namespace std;
+#include <string>
 class Node{
 public:
     string name;
@@ -10,6 +11,9 @@ public:
         this-> name = name;
         this-> color = color;
         this-> next = nullptr;
+    }
+    Node() {
+
     }
 };
 class LinkedList{
@@ -25,7 +29,6 @@ public:
         tail = nullptr;
         length = 0;
         goPast = 0;
-        playerPosition = head;
     }
     ~LinkedList(){
         Node *temp = head;
@@ -42,6 +45,7 @@ public:
             tail = newNode;
             tail-> next = head;
             length++;
+            playerPosition = head;
         }
         else if(length < 40){
             tail-> next = newNode;
@@ -51,7 +55,7 @@ public:
         }
 
         else{
-            std::cout<<"failed"<<std::endl;
+            cout<<"failed"<<endl;
         }
     }
     void addMultiple(Node nodes[], int size){
@@ -61,13 +65,14 @@ public:
         }
     }
     void printSpace(){
-        std::cout<<"Landed on: "<<playerPosition<<std::endl;
+        cout<<"Landed on: "<<playerPosition->name<<" of color "<< playerPosition->color<<endl;
     }
 void printGo(){
-    std::cout<<"Times past GO: "<<goPast<<std::endl;
+    cout<<"Times past GO: "<<goPast<<endl;
 }
     void move(){
-        int spaces = std::rand() % 11 + 1;
+        srand(time(nullptr));
+        int spaces = rand() % 11 + 1;
         for(int a = 0; a < spaces; a++){
             playerPosition = playerPosition-> next;
             if(playerPosition == head){
@@ -81,10 +86,15 @@ void printGo(){
 
 int main() {
     //Node *s1 = new Node("First street", "brown");
-    LinkedList board = new LinkedList();
+    LinkedList board;
     board.addSpace("First street", "brown");
    Node spaces[] = {{"Second street", "brown"}, {"Third street", "grey"}};
-    board.addMultiple(spaces, 2);
+    board.addMultiple(spaces, sizeof(spaces)/sizeof(Node));
+    Node stress[50];
+    for (int x = 0; x < 50; x++) {
+        stress[x] = Node(to_string(x), "a");
+    }
+    board.addMultiple(stress, 50);
     board.move();
     return 1;
 }
