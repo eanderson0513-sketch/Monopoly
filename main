@@ -144,5 +144,5 @@ int main() {
     for (int x = 0; x < 15; x++) {
         board.move();
     }
-    return 1;
+    return 1;//
 }
