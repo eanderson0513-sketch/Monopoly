@@ -2,6 +2,7 @@
 #include <random>
 using namespace std;
 #include <string>
+#include <ctime>
 class Node{
 public:
     string name;
@@ -47,7 +48,7 @@ public:
             length++;
             playerPosition = head;
         }
-        else if(length < 40){
+        else if(length <= 40){
             tail-> next = newNode;
             tail = newNode;
             tail-> next = head;
@@ -55,7 +56,7 @@ public:
         }
 
         else{
-            cout<<"failed"<<endl;
+            cout<<name<<" failed"<<endl;
         }
     }
     void addMultiple(Node nodes[], int size){
@@ -70,9 +71,14 @@ public:
 void printGo(){
     cout<<"Times past GO: "<<goPast<<endl;
 }
+    int GoPast() {
+        return goPast;
+    }
     void move(){
-        srand(time(nullptr));
-        int spaces = rand() % 11 + 1;
+        //srand((unsigned)time(0));
+        random_device rand;
+        uniform_int_distribution<int> distrib(2,12);
+        int spaces = distrib(rand);
         for(int a = 0; a < spaces; a++){
             playerPosition = playerPosition-> next;
             if(playerPosition == head){
@@ -81,6 +87,40 @@ void printGo(){
             }
         }
         printSpace();
+    }
+    void deleteHead(){
+        Node *temp = head->next;
+        delete head;
+        head = temp;
+    }
+    void deleteTail() {
+        Node *temp = head;
+        for (int x = 0; x < length - 1; x++) {
+            temp->next;
+        }
+        delete tail;
+        temp = tail;
+    }
+    void turn() {
+        if (length > 1) {
+            Node *current = head;
+            Node *previous = nullptr;
+            Node *next = nullptr;
+            while (current != nullptr) {
+                next = current->next;
+                current->next = previous;
+                previous = current;
+                current = next;
+            }
+            //tail->next = head;
+        }
+    }
+    void printFromCurrent(int count) {
+        Node *temp = playerPosition;
+        for (int x = 1; x < count + 1; x++) {
+            temp = temp->next;
+            cout<<temp->name<<" is "<<x<<" spaces ahead"<<endl;
+        }
     }
 };
 
@@ -92,9 +132,17 @@ int main() {
     board.addMultiple(spaces, sizeof(spaces)/sizeof(Node));
     Node stress[50];
     for (int x = 0; x < 50; x++) {
-        stress[x] = Node(to_string(x), "a");
+        stress[x] = Node(to_string(x+4), "a");
     }
     board.addMultiple(stress, 50);
-    board.move();
+    for (int x = 0; x < 15; x++) {
+        board.move();
+    }
+    board.printFromCurrent(7);
+    board.turn();
+    board.printFromCurrent(50);
+    for (int x = 0; x < 15; x++) {
+        board.move();
+    }
     return 1;
 }
