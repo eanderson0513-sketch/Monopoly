@@ -1,3 +1,9 @@
 Making the Linked List system for storing information and pointers because a standard array would not have the malliability needed
 Made the methods take references to variables rather than variables themselves
 Changing the storage system for the nodes in the list
+Nodes now store a string of both the name and color of the space
+Changed the time of assigning the player position to when the first space is added
+Removed all template classes and made them standard classes
+Added a seed generator to the random function to make it actually random
+Added a function to test the 40 space limit on the board
+Fixed some memory leak problems
