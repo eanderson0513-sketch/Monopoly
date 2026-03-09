@@ -127,8 +127,8 @@ void printGo(){
 int main() {
     //Node *s1 = new Node("First street", "brown");
     LinkedList board;
-    board.addSpace("First street", "brown");
-   Node spaces[] = {{"Second street", "brown"}, {"Third street", "grey"}};
+    board.addSpace("1", "brown");
+   Node spaces[] = {{"2", "brown"}, {"3", "grey"}};
     board.addMultiple(spaces, sizeof(spaces)/sizeof(Node));
     Node stress[50];
     for (int x = 0; x < 50; x++) {
